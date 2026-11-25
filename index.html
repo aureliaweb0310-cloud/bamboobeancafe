@@ -1,0 +1,986 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bamboo Bean Cafe — good things brewing</title>
+<meta name="theme-color" content="#e9f0d9">
+<meta name="description" content="Your little cafe universe. Food, friends and good things brewing at Bamboo Bean Cafe, Kalyan.">
+
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --cream:#f7f4e9;
+  --green:#234b35;
+  --lime:#d4ee85;
+  --pink:#f1b6c8;
+  --orange:#ff865c;
+  --ink:#203529;
+  --white:#fffdf8;
+}
+
+* { box-sizing:border-box; margin:0; padding:0; }
+
+html { scroll-behavior:smooth; }
+
+body {
+  background:var(--cream);
+  color:var(--ink);
+  font-family:'DM Sans',sans-serif;
+  overflow-x:hidden;
+}
+
+a { color:inherit; text-decoration:none; }
+button { font:inherit; cursor:pointer; }
+
+::selection { background:var(--pink); color:var(--green); }
+
+/* NAV */
+
+nav {
+  padding:18px 6%;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  border-bottom:1px solid #234b3520;
+}
+
+.logo {
+  font-weight:800;
+  font-size:19px;
+  letter-spacing:-1px;
+}
+
+.logo span { color:#72934c; }
+
+.nav-links {
+  display:flex;
+  align-items:center;
+  gap:25px;
+  font-size:12px;
+  font-weight:700;
+}
+
+.nav-cta {
+  padding:11px 17px;
+  background:var(--green);
+  color:white;
+  border-radius:30px;
+}
+
+/* HERO */
+
+.hero {
+  padding:65px 6% 45px;
+  position:relative;
+}
+
+.hero-topline {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  font-size:11px;
+  text-transform:uppercase;
+  letter-spacing:2px;
+  margin-bottom:24px;
+}
+
+.hero h1 {
+  font-size:clamp(60px,12vw,155px);
+  line-height:.88;
+  letter-spacing:-9px;
+  font-weight:800;
+  position:relative;
+  z-index:2;
+}
+
+.hero h1 .italic {
+  font-family:'Playfair Display',serif;
+  font-weight:600;
+  font-style:italic;
+  color:#77914d;
+}
+
+.hero h1 .outline {
+  color:transparent;
+  -webkit-text-stroke:2px var(--green);
+}
+
+.hero-bottom {
+  display:flex;
+  align-items:end;
+  justify-content:space-between;
+  margin-top:32px;
+}
+
+.hero-desc {
+  max-width:290px;
+  font-size:14px;
+  line-height:1.7;
+}
+
+.hero-desc strong { font-weight:800; }
+
+.hero-sticker {
+  width:105px;
+  height:105px;
+  background:var(--pink);
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  font-weight:800;
+  font-size:13px;
+  line-height:1.2;
+  transform:rotate(12deg);
+  animation:float 4s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%,100% { transform:rotate(12deg) translateY(0); }
+  50% { transform:rotate(7deg) translateY(-9px); }
+}
+
+/* MARQUEE */
+
+.marquee {
+  background:var(--green);
+  color:var(--lime);
+  overflow:hidden;
+  white-space:nowrap;
+  padding:14px 0;
+  font-size:13px;
+  font-weight:800;
+  letter-spacing:2px;
+}
+
+.marquee-track {
+  display:inline-block;
+  animation:marquee 25s linear infinite;
+}
+
+@keyframes marquee {
+  from { transform:translateX(0); }
+  to { transform:translateX(-50%); }
+}
+
+/* MOOD */
+
+.section {
+  padding:85px 6%;
+}
+
+.section-label {
+  text-transform:uppercase;
+  letter-spacing:2px;
+  font-size:10px;
+  font-weight:800;
+  opacity:.65;
+  margin-bottom:16px;
+}
+
+.section-title {
+  font-size:clamp(38px,6vw,76px);
+  line-height:1;
+  letter-spacing:-4px;
+  font-weight:800;
+}
+
+.section-title em {
+  font-family:'Playfair Display',serif;
+  color:#7d9455;
+  font-weight:600;
+}
+
+.mood-section {
+  background:var(--lime);
+}
+
+.mood-grid {
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:12px;
+  margin-top:35px;
+}
+
+.mood-card {
+  border:1px solid var(--green);
+  border-radius:20px;
+  padding:25px 16px;
+  background:transparent;
+  min-height:160px;
+  text-align:left;
+  color:var(--green);
+  transition:.25s;
+}
+
+.mood-card:hover,
+.mood-card.active {
+  background:var(--green);
+  color:var(--lime);
+  transform:translateY(-5px);
+}
+
+.mood-emoji { font-size:30px; display:block; margin-bottom:22px; }
+
+.mood-card h3 { font-size:15px; margin-bottom:7px; }
+
+.mood-card p { font-size:11px; opacity:.8; line-height:1.5; }
+
+.mood-result {
+  margin-top:20px;
+  background:var(--white);
+  border-radius:20px;
+  padding:23px;
+  display:none;
+  animation:fadeUp .4s ease;
+}
+
+.mood-result.show { display:block; }
+
+.mood-result h3 {
+  font-size:24px;
+  margin:6px 0;
+  letter-spacing:-1px;
+}
+
+@keyframes fadeUp {
+  from { opacity:0; transform:translateY(12px); }
+  to { opacity:1; transform:translateY(0); }
+}
+
+/* MENU */
+
+.menu-section { background:var(--cream); }
+
+.menu-header {
+  display:flex;
+  justify-content:space-between;
+  align-items:end;
+  gap:20px;
+}
+
+.menu-header p {
+  font-size:13px;
+  max-width:270px;
+  line-height:1.6;
+}
+
+.menu-tabs {
+  display:flex;
+  gap:9px;
+  flex-wrap:wrap;
+  margin:35px 0 22px;
+}
+
+.menu-tab {
+  border:1px solid var(--green);
+  padding:10px 17px;
+  background:transparent;
+  border-radius:30px;
+  font-size:12px;
+  font-weight:700;
+  transition:.2s;
+}
+
+.menu-tab.active,
+.menu-tab:hover {
+  background:var(--green);
+  color:var(--cream);
+}
+
+.menu-display {
+  background:var(--green);
+  color:var(--cream);
+  border-radius:25px;
+  padding:30px;
+  min-height:250px;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+}
+
+.menu-display h3 {
+  font-family:'Playfair Display',serif;
+  font-size:40px;
+  font-weight:600;
+}
+
+.menu-items {
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  margin:20px 0;
+}
+
+.menu-item {
+  border:1px solid #ffffff45;
+  padding:12px 16px;
+  border-radius:40px;
+  font-size:12px;
+  transition:.2s;
+}
+
+.menu-item:hover {
+  background:var(--lime);
+  color:var(--green);
+  border-color:var(--lime);
+  transform:rotate(-2deg);
+}
+
+.menu-note {
+  font-size:11px;
+  opacity:.6;
+}
+
+/* CRAVING MACHINE */
+
+.craving-section {
+  background:var(--pink);
+  text-align:center;
+}
+
+.craving-box {
+  max-width:700px;
+  margin:35px auto 0;
+  border:1.5px solid var(--green);
+  border-radius:28px;
+  padding:45px 20px;
+}
+
+.craving-box .big-emoji {
+  font-size:65px;
+  display:block;
+  margin-bottom:15px;
+  transition:.3s;
+}
+
+.craving-box h3 {
+  font-size:clamp(24px,4vw,38px);
+  letter-spacing:-1px;
+}
+
+.craving-box p {
+  font-size:13px;
+  line-height:1.6;
+  margin-top:10px;
+}
+
+.main-btn {
+  border:none;
+  background:var(--green);
+  color:white;
+  padding:15px 24px;
+  border-radius:40px;
+  font-size:12px;
+  font-weight:800;
+  margin-top:25px;
+  transition:.2s;
+}
+
+.main-btn:hover {
+  transform:scale(1.04) rotate(-1deg);
+  background:#355e43;
+}
+
+.craving-result {
+  display:none;
+  margin-top:20px;
+  font-weight:800;
+  font-size:17px;
+  animation:fadeUp .4s;
+}
+
+.craving-result.show { display:block; }
+
+/* FORTUNE */
+
+.fortune-section {
+  background:var(--green);
+  color:var(--cream);
+  text-align:center;
+}
+
+.fortune-section .section-title em { color:var(--lime); }
+
+.fortune-paper {
+  max-width:500px;
+  margin:30px auto 0;
+  padding:30px;
+  background:var(--lime);
+  color:var(--green);
+  border-radius:8px;
+  transform:rotate(-1deg);
+  min-height:130px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-family:'Playfair Display',serif;
+  font-size:23px;
+  transition:.3s;
+}
+
+.fortune-paper p { display:none; }
+.fortune-paper p.active { display:block; animation:fadeUp .3s; }
+
+/* PHOTO SECTION */
+
+.photo-section {
+  padding:65px 6%;
+  background:var(--cream);
+}
+
+.photo-grid {
+  display:grid;
+  grid-template-columns:1.2fr .8fr 1fr;
+  gap:15px;
+  margin-top:30px;
+}
+
+.photo-card {
+  border-radius:22px;
+  min-height:250px;
+  padding:20px;
+  display:flex;
+  align-items:end;
+  overflow:hidden;
+  position:relative;
+  transition:.3s;
+}
+
+.photo-card:hover { transform:translateY(-4px) rotate(-.5deg); }
+
+.photo-card span {
+  background:var(--cream);
+  color:var(--green);
+  padding:10px 14px;
+  border-radius:30px;
+  font-size:11px;
+  font-weight:800;
+  z-index:2;
+}
+
+.photo-card:nth-child(1) { background:#d9dfc2; }
+.photo-card:nth-child(2) { background:#edb5c7; }
+.photo-card:nth-child(3) { background:#e5a36e; }
+
+/* FOOTER */
+
+footer {
+  padding:60px 6% 25px;
+  background:var(--lime);
+  color:var(--green);
+}
+
+.footer-title {
+  font-size:clamp(50px,10vw,110px);
+  letter-spacing:-7px;
+  line-height:.9;
+  font-weight:800;
+}
+
+.footer-title em {
+  font-family:'Playfair Display',serif;
+}
+
+.footer-grid {
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:30px;
+  margin-top:40px;
+  padding-top:30px;
+  border-top:1px solid #234b3540;
+}
+
+.footer-grid h4 {
+  font-size:11px;
+  text-transform:uppercase;
+  letter-spacing:2px;
+  margin-bottom:12px;
+}
+
+.footer-grid p {
+  font-size:13px;
+  line-height:1.8;
+}
+
+.footer-links {
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  margin-top:15px;
+}
+
+.footer-links a {
+  border:1px solid var(--green);
+  padding:12px 17px;
+  border-radius:30px;
+  font-size:12px;
+  font-weight:800;
+  transition:.2s;
+}
+
+.footer-links a:hover {
+  background:var(--green);
+  color:var(--lime);
+}
+
+.footer-bottom {
+  display:flex;
+  justify-content:space-between;
+  margin-top:45px;
+  padding-top:15px;
+  border-top:1px solid #234b3540;
+  font-size:10px;
+  opacity:.7;
+}
+
+/* floating bean */
+
+.bean {
+  position:fixed;
+  bottom:22px;
+  right:20px;
+  width:55px;
+  height:55px;
+  border-radius:50%;
+  background:var(--pink);
+  border:1px solid var(--green);
+  display:grid;
+  place-items:center;
+  font-size:24px;
+  cursor:pointer;
+  z-index:9;
+  box-shadow:0 5px 20px #0001;
+  transition:.3s;
+}
+
+.bean:hover { transform:rotate(20deg) scale(1.1); }
+
+/* RESPONSIVE */
+
+@media(max-width:750px) {
+  .nav-links a:not(.nav-cta) { display:none; }
+
+  .hero { padding-top:48px; }
+
+  .hero h1 { letter-spacing:-4px; }
+
+  .hero-bottom { align-items:center; }
+
+  .mood-grid { grid-template-columns:1fr 1fr; }
+
+  .mood-card { min-height:135px; padding:18px; }
+
+  .section { padding:65px 6%; }
+
+  .menu-header { display:block; }
+  .menu-header p { margin-top:18px; }
+
+  .menu-display { padding:22px; }
+  .menu-display h3 { font-size:32px; }
+
+  .photo-grid { grid-template-columns:1fr 1fr; }
+  .photo-card { min-height:170px; }
+  .photo-card:nth-child(1) { grid-column:span 2; }
+
+  .footer-grid { grid-template-columns:1fr; }
+
+  .footer-bottom { gap:15px; flex-direction:column; }
+
+  .hero-sticker { width:85px;height:85px;font-size:11px; }
+}
+
+@media(prefers-reduced-motion:reduce) {
+  *, *::before, *::after {
+    animation-duration:.01ms !important;
+    transition-duration:.01ms !important;
+    scroll-behavior:auto !important;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- NAVIGATION -->
+<nav>
+  <a class="logo" href="#">bamboo<span>bean.</span> ☘</a>
+  <div class="nav-links">
+    <a href="#mood">your mood</a>
+    <a href="#menu">the menu</a>
+    <a href="#fortune">fortune teller</a>
+    <a class="nav-cta" href="#visit">find us ↗</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-topline">
+    <span>a little cafe. a lot of personality.</span>
+    <span>kalyan, india · est. good vibes</span>
+  </div>
+
+  <h1>
+    good things<br>
+    <span class="italic">are</span> brewing<span class="outline">.</span><br>
+    <span style="color:#8da567">stay</span> a while.
+  </h1>
+
+  <div class="hero-bottom">
+    <p class="hero-desc">
+      for the coffee dates, the yap sessions, the
+      "one last fry" and the <strong>memories you didn't plan.</strong>
+    </p>
+
+    <div class="hero-sticker">
+      YOUR<br>NEW<br>HAPPY<br>PLACE ☘
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee">
+  <div class="marquee-track">
+    GOOD FOOD ✳ GOOD MOOD ✳ ONE MORE SIP ✳ YOUR PEOPLE ✳ LITTLE MOMENTS ✳ 
+    GOOD FOOD ✳ GOOD MOOD ✳ ONE MORE SIP ✳ YOUR PEOPLE ✳ LITTLE MOMENTS ✳ 
+    GOOD FOOD ✳ GOOD MOOD ✳ ONE MORE SIP ✳ YOUR PEOPLE ✳ LITTLE MOMENTS ✳
+  </div>
+</div>
+
+<!-- MOOD FINDER -->
+<section class="section mood-section" id="mood">
+  <div class="section-label">01 / moodboard</div>
+  <h2 class="section-title">so, what's the<br><em>vibe today?</em></h2>
+
+  <p style="font-size:13px;margin-top:15px">
+    choose your current personality. we won't judge.
+  </p>
+
+  <div class="mood-grid">
+    <button class="mood-card" onclick="chooseMood(this,'yap')">
+      <span class="mood-emoji">🗣️</span>
+      <h3>the yapper</h3>
+      <p>came for coffee. stayed 4 hours.</p>
+    </button>
+
+    <button class="mood-card" onclick="chooseMood(this,'chill')">
+      <span class="mood-emoji">☁️</span>
+      <h3>the soft reset</h3>
+      <p>need peace and something yummy.</p>
+    </button>
+
+    <button class="mood-card" onclick="chooseMood(this,'hungry')">
+      <span class="mood-emoji">🍕</span>
+      <h3>the hungry one</h3>
+      <p>no thoughts. just food.</p>
+    </button>
+
+    <button class="mood-card" onclick="chooseMood(this,'date')">
+      <span class="mood-emoji">💌</span>
+      <h3>the main character</h3>
+      <p>romanticising literally everything.</p>
+    </button>
+  </div>
+
+  <div class="mood-result" id="moodResult">
+    <span id="moodSmall" style="font-size:10px;letter-spacing:2px">YOUR VIBE</span>
+    <h3 id="moodTitle">vibe selected</h3>
+    <p id="moodText" style="font-size:13px;line-height:1.7"></p>
+    <button class="main-btn" onclick="scrollToMenu()">see what we're craving ↗</button>
+  </div>
+</section>
+
+<!-- MENU -->
+<section class="section menu-section" id="menu">
+  <div class="section-label">02 / the cravings archive</div>
+
+  <div class="menu-header">
+    <h2 class="section-title">pick your<br><em>poison.</em></h2>
+    <p>whatever your appetite is plotting today, there's probably something here for it.</p>
+  </div>
+
+  <div class="menu-tabs" id="menuTabs">
+    <button class="menu-tab active" onclick="showMenu('pizza',this)">pizza</button>
+    <button class="menu-tab" onclick="showMenu('pasta',this)">pasta</button>
+    <button class="menu-tab" onclick="showMenu('burgers',this)">burgers</button>
+    <button class="menu-tab" onclick="showMenu('momos',this)">momos</button>
+    <button class="menu-tab" onclick="showMenu('snacks',this)">snack attack</button>
+    <button class="menu-tab" onclick="showMenu('drinks',this)">drinks</button>
+  </div>
+
+  <div class="menu-display">
+    <div>
+      <p class="section-label" style="color:var(--lime)">currently on our radar</p>
+      <h3 id="menuTitle">pizza party energy 🍕</h3>
+      <div class="menu-items" id="menuItems"></div>
+    </div>
+    <p class="menu-note">
+      menu categories based on available listings · actual items & prices may vary.
+    </p>
+  </div>
+</section>
+
+<!-- RANDOM PICKER -->
+<section class="section craving-section" id="craving">
+  <div class="section-label">03 / decision fatigue? we got you.</div>
+  <h2 class="section-title">the craving<br><em>machine.</em></h2>
+
+  <div class="craving-box">
+    <span class="big-emoji" id="cravingEmoji">🎰</span>
+    <h3 id="cravingHeadline">can't decide? leave it to fate.</h3>
+    <p id="cravingDesc">tap the button. surrender your decision-making rights.</p>
+
+    <button class="main-btn" onclick="spinCraving()">WHAT SHOULD I GET? ↗</button>
+
+    <div class="craving-result" id="cravingResult"></div>
+  </div>
+</section>
+
+<!-- FORTUNE -->
+<section class="section fortune-section" id="fortune">
+  <div class="section-label">04 / messages from the universe</div>
+  <h2 class="section-title">your cafe<br><em>fortune.</em></h2>
+  <p style="font-size:13px;margin-top:15px">the universe is on a coffee break. but it has a message for you.</p>
+
+  <div class="fortune-paper" id="fortunePaper">
+    <p class="active" id="fortuneText">click below to reveal your totally unqualified prediction.</p>
+  </div>
+
+  <button class="main-btn" style="background:var(--lime);color:var(--green)" onclick="newFortune()">
+    reveal my fortune ✳
+  </button>
+</section>
+
+<!-- PHOTO / VIBE -->
+<section class="photo-section">
+  <div class="section-label">05 / the little things</div>
+  <h2 class="section-title">less scrolling.<br><em>more living.</em></h2>
+
+  <div class="photo-grid">
+    <div class="photo-card"><span>coffee & conversations ☕</span></div>
+    <div class="photo-card"><span>the snack lore 🍟</span></div>
+    <div class="photo-card"><span>your people, your place ♡</span></div>
+  </div>
+</section>
+
+<!-- VISIT -->
+<footer id="visit">
+  <div class="section-label">06 / come say hi</div>
+  <h2 class="footer-title">meet us<br><em>at the bean.</em></h2>
+
+  <div class="footer-grid">
+    <div>
+      <h4>find your way</h4>
+      <p>
+        Bamboo Bean Cafe<br>
+        Shop 11, HIG 93, MHADA Colony,<br>
+        Zone 8, Birla College Road,<br>
+        Kalyan, Maharashtra 421301
+      </p>
+      <div class="footer-links">
+        <a target="_blank" href="https://maps.google.com/?q=Bamboo+Bean+Cafe+Birla+College+Road+Kalyan">directions ↗</a>
+      </div>
+    </div>
+
+    <div>
+      <h4>the practical stuff</h4>
+      <p>food, drinks, your favourite people.<br>come hang out.</p>
+      <div class="footer-links">
+        <a href="tel:+919987278565">call us ↗</a>
+        <a target="_blank" href="https://www.zomato.com/mumbai/bamboo-bean-cafe-kalyan-thane">menu / online ↗</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <span>bamboo bean cafe © good things brewing.</span>
+    <span>made with a little extra love ☘</span>
+  </div>
+</footer>
+
+<button class="bean" onclick="beanClick()" title="click me">☘</button>
+
+<script>
+/* MOOD SELECTOR */
+
+const moods = {
+  yap:{
+    title:"the yapper has arrived.",
+    text:"Grab something snackable, order a drink, and prepare to solve absolutely nothing while discussing absolutely everything. This is your sign to call your friends."
+  },
+  chill:{
+    title:"soft reset initiated.",
+    text:"No deadlines in this imaginary universe. Pick a drink, take a breather, and give yourself permission to just exist for a little while."
+  },
+  hungry:{
+    title:"food is the main plot.",
+    text:"You did not come here to look cute and sip slowly. You came to eat. Explore the pizzas, burgers, pasta, momos and snacks."
+  },
+  date:{
+    title:"main character behaviour.",
+    text:"Get your favourite thing, sit somewhere nice, take a few pictures if you want, and make an ordinary afternoon feel like a movie scene."
+  }
+};
+
+function chooseMood(button,mood) {
+  document.querySelectorAll('.mood-card').forEach(c=>c.classList.remove('active'));
+  button.classList.add('active');
+
+  const result=document.getElementById('moodResult');
+  result.classList.remove('show');
+
+  document.getElementById('moodTitle').textContent=moods[mood].title;
+  document.getElementById('moodText').textContent=moods[mood].text;
+
+  setTimeout(()=>result.classList.add('show'),50);
+}
+
+function scrollToMenu() {
+  document.getElementById('menu').scrollIntoView({behavior:'smooth'});
+}
+
+/* MENU EXPLORER */
+
+const menus={
+  pizza:{
+    title:"pizza party energy 🍕",
+    items:["Pizza","Veg Pizza","Non-Veg Pizza"]
+  },
+  pasta:{
+    title:"pasta & problems 🍝",
+    items:["Veg Pasta","Non-Veg Pasta"]
+  },
+  burgers:{
+    title:"burger o'clock 🍔",
+    items:["Burgers"]
+  },
+  momos:{
+    title:"momo state of mind 🥟",
+    items:["Veg Momos","Non-Veg Momos"]
+  },
+  snacks:{
+    title:"little treat department 🍟",
+    items:["Panini","Sandwiches","Garlic Bread","Maggie","French Fries"]
+  },
+  drinks:{
+    title:"hydration but make it fun 🧋",
+    items:["Shakes","Creamy Shakes","Iced Tea","Mocktails"]
+  }
+};
+
+function showMenu(type,button) {
+  document.querySelectorAll('.menu-tab').forEach(t=>t.classList.remove('active'));
+  button.classList.add('active');
+
+  document.getElementById('menuTitle').textContent=menus[type].title;
+
+  const container=document.getElementById('menuItems');
+  container.innerHTML='';
+
+  menus[type].items.forEach(item=>{
+    const chip=document.createElement('span');
+    chip.className='menu-item';
+    chip.textContent=item;
+    chip.onclick=()=> {
+      chip.style.background='#d4ee85';
+      chip.style.color='#234b35';
+      chip.textContent='♡ '+item;
+    };
+    container.appendChild(chip);
+  });
+}
+
+/* RANDOM CRAVING */
+
+const cravings=[
+  {emoji:"🍕",name:"pizza is calling.",desc:"Your next personality trait is melted cheese."},
+  {emoji:"🍝",name:"pasta. obviously.",desc:"Carbs, comfort, and absolutely zero regrets."},
+  {emoji:"🍔",name:"burger main character.",desc:"Today's plot twist is a really good burger."},
+  {emoji:"🥟",name:"momo supremacy.",desc:"A little dumpling joy could fix the timeline."},
+  {emoji:"🍟",name:"fries before everything.",desc:"Some things are simply non-negotiable."},
+  {emoji:"🥪",name:"sandwich era.",desc:"A handheld happiness situation."},
+  {emoji:"🧋",name:"drink something fun.",desc:"Shake, iced tea or mocktail energy."},
+  {emoji:"🥖",name:"garlic bread agenda.",desc:"Honestly, this is a very solid life decision."}
+];
+
+let previousCraving=-1;
+
+function spinCraving() {
+  let n;
+  do { n=Math.floor(Math.random()*cravings.length); }
+  while(n===previousCraving && cravings.length>1);
+  previousCraving=n;
+
+  const c=cravings[n];
+  document.getElementById('cravingEmoji').textContent=c.emoji;
+  document.getElementById('cravingHeadline').textContent=c.name;
+  document.getElementById('cravingDesc').textContent=c.desc;
+
+  const result=document.getElementById('cravingResult');
+  result.textContent="the craving machine has spoken. go explore the menu ↓";
+  result.classList.remove('show');
+  void result.offsetWidth;
+  result.classList.add('show');
+}
+
+/* FORTUNES */
+
+const fortunes=[
+  "Someone is about to text you. Or it's a food delivery notification. Either way, stay open to possibilities.",
+  "You are not behind. You are on your own timeline. Have a snack about it.",
+  "Your next laugh will be louder than your last worry.",
+  "A tiny good thing is on its way. It might involve cheese.",
+  "Your future looks bright. Your screen brightness, however, should probably be lowered.",
+  "The group chat is about to become interesting. Proceed with snacks.",
+  "Plot twist: the break you take today is part of the progress.",
+  "You deserve the same patience you keep giving everyone else.",
+  "Your lucky colour today is matcha green. Your lucky activity is doing literally nothing for 10 minutes.",
+  "A new memory is loading. Make sure you are actually present for it.",
+  "Don't overthink the text. Don't overthink the menu. Just vibe.",
+  "Today’s cosmic instruction: drink water, laugh with someone, be a little silly."
+];
+
+let previousFortune=-1;
+
+function newFortune() {
+  let n;
+  do { n=Math.floor(Math.random()*fortunes.length); }
+  while(n===previousFortune);
+  previousFortune=n;
+  document.getElementById('fortuneText').textContent=fortunes[n];
+}
+
+/* RANDOM BEAN BUTTON */
+
+const beanMessages=[
+  "pssst. you're doing better than you think. ☘",
+  "you clicked a bean. that's kinda iconic.",
+  "drink water. eat something. text your friends.",
+  "you have been officially assigned good vibes.",
+  "this is your sign to take a break.",
+  "tiny bean. big feelings. ♡"
+];
+
+function beanClick() {
+  const msg=beanMessages[Math.floor(Math.random()*beanMessages.length)];
+  const bean=document.querySelector('.bean');
+  bean.textContent="♡";
+  bean.title=msg;
+  bean.style.transform="rotate(180deg) scale(1.15)";
+  setTimeout(()=>{
+    bean.textContent="☘";
+    bean.style.transform="";
+  },500);
+  alert(msg);
+}
+
+/* INITIAL MENU */
+
+showMenu('pizza',document.querySelector('.menu-tab'));
+</script>
+</body>
+</html>
